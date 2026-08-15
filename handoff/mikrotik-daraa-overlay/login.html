@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#123f35" />
+    <meta name="description" content="بوابة الدخول إلى شبكة الإنترنت في محافظة درعا" />
+    <title>بوابة الإنترنت | محافظة درعا</title>
+    <link rel="icon" href="assets/brand/logo.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <script src="assets/js/main.js" defer></script>
+  </head>
+
+  <body>
+    <div class="ambient" aria-hidden="true">
+      <span class="ambient__orb ambient__orb--one"></span>
+      <span class="ambient__orb ambient__orb--two"></span>
+      <span class="ambient__grid"></span>
+    </div>
+
+    $(if chap-id)
+    <form name="sendin" action="$(link-login-only)" method="post" hidden>
+      <input type="hidden" name="username" />
+      <input type="hidden" name="password" />
+      <input type="hidden" name="dst" value="$(link-orig)" />
+      <input type="hidden" name="popup" value="true" />
+    </form>
+    <script src="md5.js"></script>
+    <script>
+      function doLogin() {
+        const login = document.forms.login;
+        const sendin = document.forms.sendin;
+        sendin.username.value = login.username.value;
+        sendin.password.value = hexMD5("$(chap-id)" + login.password.value + "$(chap-challenge)");
+        sendin.submit();
+        return false;
+      }
+    </script>
+    $(endif)
+
+    <main class="portal-shell">
+      <section class="identity" aria-label="هوية الجهة">
+        <div class="identity__eyebrow">
+          <img src="assets/brand/flag.svg" alt="" />
+          <span class="identity__eyebrow-line"></span>
+          الجمهورية العربية السورية
+        </div>
+
+        <div class="emblem" aria-hidden="true">
+          <span class="emblem__orbit emblem__orbit--outer"></span>
+          <span class="emblem__orbit emblem__orbit--inner"></span>
+          <img src="assets/brand/logo.svg" alt="" />
+        </div>
+
+        <div>
+          <p class="identity__overline">الخدمات الرقمية</p>
+          <h1><span class="identity__title-prefix">محافظة</span><span class="identity__title-place">درعا</span></h1>
+          <p class="identity__copy">
+            بوابتك الآمنة للاتصال بشبكة الإنترنت العامة.
+          </p>
+        </div>
+
+        <div class="identity__signal" aria-hidden="true">
+          <i></i><i></i><i></i><i></i>
+          <span>متصل بالشبكة</span>
+        </div>
+      </section>
+
+      <section class="login-card" aria-labelledby="login-title">
+        <header class="login-card__header">
+          <p class="login-card__kicker">أهلاً بك</p>
+          <h2 id="login-title">تسجيل الدخول</h2>
+          <p>أدخل بيانات حسابك للمتابعة إلى الإنترنت</p>
+        </header>
+
+        <p id="router-message" class="form-message" role="alert" hidden>$(error)</p>
+
+        <form
+          id="login-form"
+          name="login"
+          action="$(link-login-only)"
+          method="post"
+          $(if chap-id) onsubmit="return doLogin()" $(endif)
+        >
+          <input type="hidden" name="dst" value="$(link-orig)" />
+          <input type="hidden" name="popup" value="true" />
+
+          <label class="field">
+            <span class="field__label">اسم المستخدم</span>
+            <span class="field__control">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M20 21a8 8 0 0 0-16 0M12 13a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" />
+              </svg>
+              <input
+                name="username"
+                type="text"
+                autocomplete="username"
+                inputmode="text"
+                placeholder="أدخل اسم المستخدم"
+                value="$(username)"
+                required
+                autofocus
+              />
+            </span>
+          </label>
+
+          <label class="field">
+            <span class="field__label">كلمة المرور</span>
+            <span class="field__control">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M7 10V8a5 5 0 0 1 10 0v2m1 11H6a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2Z" />
+              </svg>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="أدخل كلمة المرور"
+                required
+              />
+              <button
+                id="toggle-password"
+                class="field__toggle"
+                type="button"
+                aria-label="إظهار كلمة المرور"
+                aria-pressed="false"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" />
+                  <circle cx="12" cy="12" r="2.75" />
+                </svg>
+              </button>
+            </span>
+          </label>
+
+          <button class="submit-button" type="submit">
+            <span>الاتصال بالإنترنت</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </button>
+        </form>
+
+        <footer class="login-card__footer">
+          <span class="secure-dot" aria-hidden="true"></span>
+          اتصال آمن ومحمي
+          <span aria-hidden="true">•</span>
+          للدعم الفني تواصل مع مسؤول الشبكة
+        </footer>
+      </section>
+    </main>
+
+    <footer class="page-footer">
+      <div class="page-footer__meta">
+        <span>محافظة درعا</span>
+        <span>© <span id="year"></span> جميع الحقوق محفوظة</span>
+      </div>
+      <span class="page-footer__developer">تم التطوير بواسطة المهندس أحمد الحريري</span>
+      <nav class="social-links" aria-label="حسابات محافظة درعا على مواقع التواصل الاجتماعي">
+        <a class="social-link social-link--facebook" href="https://www.facebook.com/DaraaGov1/" target="_blank" rel="noopener noreferrer" aria-label="فيسبوك"></a>
+        <a class="social-link social-link--instagram" href="https://www.instagram.com/daraagov1/" target="_blank" rel="noopener noreferrer" aria-label="إنستغرام"></a>
+        <a class="social-link social-link--x" href="https://x.com/DaraaGov1" target="_blank" rel="noopener noreferrer" aria-label="إكس"></a>
+        <a class="social-link social-link--telegram" href="https://t.me/DaraaGov1" target="_blank" rel="noopener noreferrer" aria-label="تيليغرام"></a>
+      </nav>
+    </footer>
+  </body>
+</html>
